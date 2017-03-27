@@ -1,0 +1,41 @@
+﻿<% include header.html %>
+	<div class="c-message_board">
+		<div class="c-article_inner g-clr">
+			<div class="c-message_selector g-clr">
+				<a class="g-fl c-active">文章</a>
+				<a class="g-fl g-pointer" href="/message">留言板</a>
+			</div>
+			<div class="c-article_box">
+			<% 	var str = "";
+				if( articles && articles.length > 0){
+					var str = "", len = articles.length, temp, i = 0, tagsLen = 0, t = 0, favor = "", opposition = "";
+					for( ; i < len; i++ ){
+						temp = articles[ i ];
+						str += '<a href="/articleDisplay/'+ temp._id +'" class="g-clr c-article"><div class="c-article_ititle">'+ temp.title +'</div><div class="g-clr">';
+						(temp.cover).forEach(function(e){
+							str += '<div class="g-fl c-article_image" style="background-image: url('+ e +')"></div>';
+						});
+					str += '</div><div class="g-clr c-article_info"><span class="g-fl">发布于 '+ temp.format +'</span><span class="g-fr">查看数：'+ temp.view +'</span></div></a>';
+					}
+				}
+			%>
+			<%- str %>
+			</div>
+			<div id="message_box"></div>
+		</div>
+	</div>
+	<script type="text/javascript">
+		<% if( typeof(user) === "object" ){ %>
+			<% const script = ("var user = '" + user.username + "';") %>
+			<%- script %>
+		<% } %>
+		common.pagination.init({
+			"total" : <%= total %>,
+			"limit" : <%= limit %>,
+			"cur_page" : <%= cur_page %>,
+			"container" : "#message_box",
+			"url" : "/message?page="
+		});
+	</script>
+	<script src="/static/js/index.js"></script>
+<% include footer.html %> 

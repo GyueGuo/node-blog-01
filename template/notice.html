@@ -1,0 +1,31 @@
+﻿<% include m_header.html %>
+			<ul class="c-notice_ul">
+				<% 
+					var str = "";
+				 	if(notice.length === 0){
+						str = "<div class=\"g-noinfo g-text_center\">暂无消息</div>";
+				 	}else{
+						notice.forEach(function(e){
+							var time = e.created;
+							str += "<li class=\"c-notice_li g-relative g-clr\"><i class=\"iconfont icon-feixin\"></i><div class=\"c-notice_left\" title=\"" + e.content + "\">" + e.content + "</div><div class=\"c-notice_right g-text_right\">" + e.format + "</div></li>";
+						});
+				 	}
+				%>
+				<%- str %>
+			</ul>
+		</div>
+	</div>
+	<div class="g-fix_gray" id="cropper">
+		<iframe class="c-cropper_frame g-center" id="cropper_frame" name="cropper_frame" src="/static/imagecropper.html" scrolling="no" frameborder="0"></iframe>
+	</div>
+	<script>
+		common.pagination.init({
+		    "total" : <%= total %>,
+		    "limit" : <%= limit %>,
+		    "cur_page" : <%= cur_page %>,
+		    "container" : ".g-user_right",
+		    "url" : "/notice?page="
+		});
+	</script>
+	<script src="/static/js/notice.js"></script>
+<% include footer.html %> 

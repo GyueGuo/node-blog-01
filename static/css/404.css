@@ -1,0 +1,7 @@
+*{margin:0;padding:0;text-align:center;font-weight:normal;font-family:"Microsoft Yahei";}
+body{padding-top:20px;}
+img{display:block;border:none;width:200px;margin:auto;}
+div{line-height:120px;}
+h2{display:inline;font-size:50px;}
+h4{display:inline;font-size:25px;}
+a{display:inline-block;text-decoration:none;color:#fff;font-size:18px;padding:7px 20px;background:#fe9500;}

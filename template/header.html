@@ -1,0 +1,41 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+	<meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title><%= title%></title>
+    <!-- normalize.css -->
+    <link rel="stylesheet" href="/static/css/necolas.github.io.css" />
+    <!-- 布局样式 -->
+    <link rel="stylesheet" href="/static/css/gird.css" />
+    <!-- 组件样式 -->
+    <link rel="stylesheet" href="/static/css/component.css" />
+    <!-- jquery cdn -->
+    <script src="http://lib.sinaapp.com/js/jquery/1.9.1/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="/static/js/common.js"></script>
+    <body>
+        <div class="c-side_alert" id="side_alert"></div>
+        <% if( action !== "login" && action !== "register" ) {%>
+        <div class="g-top">
+            <div class="g-top_inner g-clr">
+                <a href="/index"><img class="g-fl c-logo" src="/static/images/logo.jpg" /></a>
+                <div class="c-user_info g-fr g-clr">
+                    <% if( typeof(user) !== "object" ){ %>
+                    <a class="g-vmiddle" href="/login">登录</a>
+                    <a class="g-vmiddle" href="/register">注册</a>
+                    <% }else{ %>
+                    <span id="logborad" style="display: none;">
+                        <a class="g-vmiddle" href="/login">登录</a>
+                        <a class="g-vmiddle" href="/register">注册</a>
+                    </span>
+                    <span id="infoborad">
+                        <img class="c-user_portrait g-vmiddle" src="<%= user.portrait %>"  />
+                        <a class="g-vmiddle" href="/setting"><%= user.username%></a>
+                        <a class="g-vmiddle" onclick="common.logout()">退出</a>
+                    </span>
+                    <% } %>
+                </div>
+            </div>
+       </div><% } %>
+       <div class="c-canvas"><canvas id="cvs"></canvas></div>

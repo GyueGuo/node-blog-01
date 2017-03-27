@@ -1,0 +1,26 @@
+﻿<% include m_header.html %>
+			<%
+				if(user.portrait){
+					var portrait = user.portrait;
+				}else{
+					var portrait = "/temp/default.gif";
+				}
+			%>
+			<div class="c-setting_portrait g-relative">
+				<img id="portrait" src="<%= portrait %>" />
+				<label>
+					<input type="file" onchange="uploadPortrait.preview(this)" accept="image/png,image/jpg,image/jpeg,image/gif" />
+					<div class="c-setting_portrait_text g-center">上传头像</div>
+				</label>
+			</div>
+			<div class="c-setting_div g-text_center">
+					昵称： <input type="text" id="nick" disabled="disabled" value="<%= user.nick%>" /><i class="iconfont icon-bianji opt" id="edit"></i>
+			</div>
+			<div class="c-user_save g-distabled" id="save">保存</div>
+		</div>
+	</div>
+	<div class="g-fix_gray" id="cropper">
+		<iframe class="c-cropper_frame g-center" id="cropper_frame" name="cropper_frame" src="/static/imagecropper.html" scrolling="no" frameborder="0"></iframe>
+	</div>
+	<script src="/static/js/setting.js"></script>
+<% include footer.html %> 
