@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- normalize.css -->
+    <link rel="stylesheet" href="/static/css/necolas.github.io.css" />
+    <!-- 布局样式 -->
+    <link rel="stylesheet" href="/static/css/gird.css" />
+    <!-- 组件样式 -->
+    <link rel="stylesheet" href="/static/css/component.css" />
+    <link href="/static/cropper/cropper.min.css" rel="stylesheet">
+</head>
+
+<body>
+      <div class="c-cropper">
+            <canvas id="cropper"></canvas>
+      </div>
+      <div class="g-fl c-cropper_btn g-text_center" onclick="postback()">确定</div> <div class="g-fl c-cropper_btn g-text_center" onclick="cancel()">取消</div>
+      <!-- Alert -->
+      <script src="http://lib.sinaapp.com/js/jquery/1.9.1/jquery-1.9.1.min.js"></script>
+      <script src="/static/cropper/cropper.min.js"></script>
+      <script type="text/javascript">
+        $(document).ready(function(){
+          $('#cropper').cropper({
+            aspectRatio: 1 / 1,
+            mouseWheelZoom : false
+          });
+        });
+        function cancel(){
+          $( window.parent.document.getElementById("cropper") ).hide();
+        }
+        window.addEventListener("message",function(e){
+          var img = (document.createElement("img")).src = e.data;
+          $("#cropper").cropper('reset', true).cropper('replace', img);
+          if(window.parent.cropperCallBack){
+            window.parent.cropperCallBack();
+          }
+        },false);
+
+        function postback(){
+          window.parent.postMessage({"from":"cropper", "data":($("#cropper").cropper("getCroppedCanvas")).toDataURL("image/png")},"http://"+location.host);
+        }
+      </script>
+</body>
+
+</html>

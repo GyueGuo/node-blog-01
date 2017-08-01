@@ -1,0 +1,14 @@
+﻿<% include header.html %> 
+	<div class="g-user_container g-clr">
+		<div class="g-user_left g-relative">
+			<a class="c-user_nav" href="/index"><i class="iconfont icon-shouyefill"></i>首页</a>
+			<a class="c-user_nav<% if(action ==='article'){%> active<%}%>" href="/article"><i class="iconfont icon-pingjia"></i>发布文章</a>
+			<a class="c-user_nav<% if(action ==='history'){%> active<%}%>" href="/history"><i class="iconfont icon-gongzuobaogao"></i>历史文章</a>
+			<a class="c-user_nav<% if(action ==='notice'){%> active<%}%>" href="/notice"><i class="iconfont icon-tongzhifill"></i>消息通知</a>
+			<a class="c-user_nav<% if(action ==='message'){%> active<%}%>" href="/message"><i class="iconfont icon-liuyanfill"></i>留言板</a>
+			<a class="c-user_nav<% if(action ==='websocket'){%> active<%}%>" href="/websocket"><i class="iconfont icon-jiaosequnti"></i>聊天室</a>
+			<a class="c-user_nav<% if(action ==='setting'){%> active<%}%>" href="/setting"><i class="iconfont icon-shezhi1"></i>设置</a>
+		</div>
+		<div class="g-user_right">
+			<div class="g-user_title"><a><%= title%></a></div>
+		

@@ -1,0 +1,43 @@
+﻿<% include m_header.html %>
+			<ul class="c-notice_ul">
+				<% 	
+					const status = ["<div class=\" g-fr c-history_status c-status0\"><i class=\"iconfont icon-tishi\"></i>待审核</div>", "<div class=\" g-fr c-history_status c-status1\"><i class=\"iconfont icon-tishi\"></i>已通过</div>", "<div class=\" g-fr c-history_status c-status2\"><i class=\"iconfont icon-tishi\"></i>未通过</span></div>"];
+					var str = "";
+				 	if(history.length === 0){
+						str = "<div class=\"g-noinfo g-text_center\">暂无消息</div>";
+				 	}else{
+						history.forEach(function(e){
+							str += "<li class=\"c-history_li g-relative g-clr\"><div class=\"c-history_title\">" + e.title + status[e.status] +"</div>";
+							if( e.cover.length > 0 ){
+								str += "<div class=\"g-clr\">";
+								var i = 0;
+								for( ; i < e.cover.length; i++ ){
+									str += "<div class=\"c-history_cover\" style=\"background-image:url(" + e.cover[ i ] + ")\"></div>";
+									if(i >= 3){
+										break;	
+									}
+								}
+								str += "</div>";
+							}
+							str += "<div class=\"c-history_info\"><span>发布时间："+ e.format + "</span><span>查看次数："+ e.view + "</span></div></li>";
+							
+						});
+				 	}
+				%>
+				<%- str %>
+			</ul>
+		</div>
+	</div>
+	<div class="g-fix_gray" id="cropper">
+		<iframe class="c-cropper_frame g-center" id="cropper_frame" name="cropper_frame" src="/static/imagecropper.html" scrolling="no" frameborder="0"></iframe>
+	</div>
+	<script>
+		common.pagination.init({
+			"total" : <%= total %>,
+			"limit" : <%= limit %>,
+			"cur_page" : <%= cur_page %>,
+			"container" : ".g-user_right",
+			"url" : "/history?page="
+		});
+	</script>
+<% include footer.html %> 

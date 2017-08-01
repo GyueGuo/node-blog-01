@@ -1,0 +1,62 @@
+﻿<% include header.html %>
+	<div class="c-message_board">
+		<div class="c-message_inner g-clr">
+			<div class="c-message_selector g-clr">
+				<a class="g-fl" href="/index">文章</a>
+				<a class="g-fl g-pointer c-active">留言板</a>
+			</div>
+			<div class="c-article_box"><% 	var str = "";
+				if( message && message.length > 0){
+					var str = "", len = message.length, temp, i = 0, tagsLen = 0, t = 0, favor = "", opposition = "";
+					for( ; i < len; i++ ){
+						temp = message[ i ];
+						if( typeof( user) === "object" ){
+							if( temp.favor.indexOf( user.username ) > -1 ){
+								favor = " c-message_opinion";
+							}else{
+								favor = "";
+							}
+							if( temp.opposition.indexOf( user.username ) > -1 ){
+								opposition = " c-message_opinion";
+							}else{
+								opposition = "";
+							}
+						}
+						str += '<div class="c-message" _id="'+ temp._id +'"><div class="c-message_info">'+ temp.author +' <span class="g-split">|</span>'+ temp.format +'<div class="g-fr g-pointer c-message_opposition'+ opposition +'"><i class="iconfont icon-bad"></i>反对[ <span>'+ temp.opposition.length +'</span> ]</div><div class="g-fr g-pointer c-message_favor'+ favor +'"><i class="iconfont icon-good"></i>赞同[ <span>'+ temp.favor.length +'</span> ]</div></div><div class="c-message_content"><span>'+ temp.content +'</span>';
+						tagsLen = temp.tags.length;
+						if( tagsLen > 0){
+							for( ; t < tagsLen ; t++ ){
+								str += '<span class="c-message_tag">'+ temp.tags[ t ] +'</span>'
+							}
+						}
+						str += '</div></div>';
+					}
+				}
+			%>
+			<%- str %></div>
+			<div id="message_box"></div>
+			<textarea id="message" class="g-box c_message_textarea" rows=5 placeholder="请留下您的宝贵意见（200字以内）..."></textarea>
+			<div class="c_message_operations g-clr">
+				<div class="g-fl g-pointer c_message_tags">bug</div>
+				<div class="g-fl g-pointer c_message_tags">吐槽</div>
+				<div class="g-fl g-pointer c_message_tags">建议</div>
+				<div class="g-fr g-pointer c_message_btn" id="sendMessage">提交</div>
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript">
+		var user = "";
+		<% if( typeof(user) === "object" ){ %>
+			<% const script = ("user = '" + user.username + "';") %>
+			<%- script %>
+		<% } %>
+		common.pagination.init({
+			"total" : <%= total %>,
+			"limit" : <%= limit %>,
+			"cur_page" : <%= cur_page %>,
+			"container" : "#message_box",
+			"url" : "/message?page="
+		});
+	</script>
+	<script src="/static/js/message.js"></script>
+<% include footer.html %> 

@@ -1,0 +1,241 @@
+@import url("//at.alicdn.com/t/font_6po8dymqie1giudi.css");
+
+*{
+	margin:0;
+	padding:0;
+}
+html{
+	min-width: 960px;
+}
+body, input, textarea{
+    font-family: "Microsoft Yahei", Helvetica, Arial, sans-serif;
+}
+body, input, textarea, a{
+	color:#333;
+}
+a{
+	text-decoration: none;
+}
+ul,li{
+	list-style:none;
+}
+img{
+	border:none;
+	outline: none;
+}
+input:disabled{
+	background-color: #f2f2f2;
+	border-color:#f2f2f2 !important; 
+}
+textarea{
+	outline: none;
+}
+canvas{
+    display: block;
+}
+.iconfont{
+	font-size: 14px;
+}
+.g-text_left{
+	text-align: left;
+}
+.g-text_center{
+	text-align: center;
+}
+.g-text_right{
+	text-align: right;
+}
+.g-fl{
+	float: left;
+}
+.g-fr{
+	float:right;
+}
+.g-clr:after{
+	content:"";
+	display: block;
+	clear: both;
+}
+.g-relative{
+	position: relative;
+}
+.g-table{
+	display: table;
+}
+.g-cell{
+	display: table-cell
+}
+.g-vmiddle{
+	vertical-align: middle;
+}
+.g-distabled{
+	background-color: #aaa !important;
+	color:#fff !important;
+}
+small{
+	font-size: 0.6em;
+    vertical-align: text-bottom;
+}
+.g-box{
+	-webkit-box-sizing: border-box;
+	-ms-box-sizing: border-box;
+	-o-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+.g-top{
+	line-height: 50px;
+	background-color: #fff;
+	width: 100%;
+	border-bottom: 1px solid #ccc;
+}
+.g-top_inner{
+	margin: auto;
+	width: 960px;
+}
+.g-banner{
+	position: relative;
+	width: 100%;
+	padding:40px 0;
+}
+.g-footer{
+	height: 100px;
+	width: 100%;
+	background-color: rgba(0,0,0,0.8);
+	color:#fff;
+}
+.g-footer a{
+	color:#fff;
+}
+.g-center{
+	-webkit-transform: translate(-50%, -50%);
+	-moz-transform: translate(-50%, -50%);
+	-ms-transform: translate(-50%, -50%);
+	-o-transform: translate(-50%, -50%);
+	transform: translate(-50%, -50%);
+}
+.g-fix_gray{
+	display: none;
+	position: fixed;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	z-index: 99;
+	background-color: rgba(0,0,0,0.8);
+}
+.g-container{
+	width: 940px;
+	margin:40px auto;
+	padding:10px;
+	background-color: #fff;
+	-webkit-box-shadow: 0 0 3px 3px #ddd;
+	-ms-box-shadow: 0 0 3px 3px #ddd;
+	-moz-box-shadow: 0 0 3px 3px #ddd;
+	-o-box-shadow: 0 0 3px 3px #ddd;
+	box-shadow: 0 0 3px 3px #ddd;
+	border-radius: 3px
+}
+.g-inner_left{
+	float: left;
+	width: 619px;
+	margin:10px 0 20px;
+	border-right: 1px solid #ccc;
+}
+.g-inner_right{
+	float: left;
+	margin:20px 0 20px 20px;
+	width: 300px;
+}
+.g-forbidden{
+	cursor: wait;
+}
+.g-pointer{
+	cursor: pointer;
+}
+.g-user_container{
+	width: 960px;
+	margin:40px auto;
+}
+.g-user_left{
+	float: left;
+	margin:0 20px 20px 0;
+	width: 200px;
+	background-color: #fff;
+	-webkit-box-shadow: 2px 2px 2px 2px #ddd;
+	-ms-box-shadow: 2px 2px 2px 2px #ddd;
+	-moz-box-shadow: 2px 2px 2px 2px #ddd;
+	-o-box-shadow: 2px 2px 2px 2px #ddd;
+	box-shadow: 2px 2px 2px 2px #ddd;
+}
+.g-user_right{
+	float: left;
+	width: 718px;
+	padding: 10px;
+	margin:0 0 20px;
+	-webkit-box-shadow: 2px 2px 2px 2px #ddd;
+	-ms-box-shadow: 2px 2px 2px 2px #ddd;
+	-moz-box-shadow: 2px 2px 2px 2px #ddd;
+	-o-box-shadow: 2px 2px 2px 2px #ddd;
+	box-shadow: 2px 2px 2px 2px #ddd;
+	background-color: #fff;
+}
+.g-user_title{
+	line-height: 40px;
+	margin-bottom: 20px;
+	text-indent: 0.2em;
+    border-bottom: #E0E5E8 1px solid;
+}
+.g-user_title a{
+	display: table;
+	color:#039bfb;
+    border-bottom: #039bfb 2px solid;
+    cursor: pointer;
+}
+.g-noinfo{
+	line-height: 200px;
+	padding-bottom: 100px;
+	color:#999;
+	font-size: 32px;
+}
+
+/*分页*/
+.g-pages{
+	float: right;
+    margin: 20px 20px 20px 0;
+    border: 1px solid #dcdcdc;
+    border-radius: 3px;
+    line-height: 25px;
+    font-size: 12px;
+
+}
+.g-pages:after{
+	content: "";
+	display: block;
+	clear: both;
+}
+.g-pagespan {
+	float: left;
+    padding: 0 12px;
+    border-left: 1px solid #dcdcdc;
+    margin-left: -1px;
+    cursor: pointer;
+}
+
+.g-pagenum {
+	display: inline-block;
+    margin: 3px 5px;
+    padding: 2px 0;
+    width: 40px;
+    border: 1px solid #dcdcdc;
+    text-align: center;
+}
+
+.g-page_disabled{
+    color: #999;
+}
+.g-split{
+	display: inline-block;
+	padding:0 10px;
+	color:#ccc;
+}

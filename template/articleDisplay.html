@@ -1,0 +1,9 @@
+﻿<% include header.html %>
+	<div class="c-message_board">
+		<div class="c-article_inner g-clr">
+			<h2 class="c-article_details_title g-text_center"><%= article.title %></h2>
+			<p class="c-article_details_info g-text_center">作者：<%= article.author %>　|　发布于：<%= article.format %>　|　查看：<%= article.view %></p>
+			<div class="c-article_details"><%- article.content %></div>
+		</div>
+	</div>
+<% include footer.html %> 

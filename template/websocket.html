@@ -1,0 +1,117 @@
+﻿<% include header.html %>
+	<div class="c-message_board">
+		<div class="c-chat g-clr">
+			<div class="c-chat_board"></div>
+			<textarea id="chat" class="g-box c-chat_area" cols="30" rows="10" autocomplete="off" placeholder="输入内容"></textarea>
+			<div class="g-fr c-chat-btn g-pointer" onclick="submit()">提交</div>
+		</div>
+	</div>
+	<script src="/static/js/common.js"></script>
+	<script type="text/javascript">
+        var user =JSON.parse('<%- JSON.stringify(user) %>');  
+        var dom = document.querySelector(".c-chat_board");
+        var messagePool = [];
+		var Gsocket = (function(){
+            var initCfg = {
+                success : function(evt){
+                    console.log("WebSocket has been opened");
+                },
+                error : function(evt){
+                    console.log("error opening WebSocket");
+                },
+                message : function(evt){
+                    console.log("a message has been received");
+                    console.log(evt.data);
+                },
+                close : function(evt){
+                    console.log("WebSocket has been closed");
+                },
+                binaryType : 'arraybuffer'
+            };
+            function init(arg){
+                if ( "WebSocket" in window ){
+                   // var ws = new WebSocket( "ws://im.ziyafish.com:8083/mqtt", 'mqttv3.1' );
+                    var ws = new WebSocket( "ws://"+ arg.url );
+                    ws.binaryType = (arg.binaryType ? arg.binaryType : initCfg.binaryType);
+                    ws.onopen = (arg.success ? arg.success : initCfg.success);
+                    ws.onerror = (arg.error ? arg.error : initCfg.error);
+                    ws.onmessage = (arg.message ? arg.message : initCfg.message);
+                    ws.onclose = (arg.close ? arg.close : initCfg.close);
+                    return ws;
+                }
+            }
+            return init;
+        })();
+        var receive = function(evt){
+        	var data = JSON.parse(evt.data);
+            if("own" in data){
+                timeoutCheck(data._id);
+            }else{
+                showMessage(data);
+            }
+        };
+        function showMessage(data, own){
+            var div = document.createElement("div");
+            var str = "<p><span class='c-chat_nick'>";
+            if( data.type ===0 || data.type === 1 ){
+                div.className = "c-chat_tip";
+                div.innerHTML = data.msg;
+            }else{
+                div.className = "c-chat_record";
+                if(own){
+                    div.id = own;
+                }
+                str += data.nick;
+                str += "</span><span class='c-chat_time'>";
+                str += data.date;
+                str += "</span><p class='c-chat_cnt'>";
+                str += data.msg;
+                div.innerHTML = str;
+            }
+            dom.appendChild(div);
+        }
+        function submit(str){
+        	var cnt = str || $("#chat").val();
+        	if(s.readyState !== 1 && cnt.length === 0 ){
+        		return;
+        	}
+            var now = new Date();
+            var json = {
+                type : 2,
+                nick : user.nick,
+                msg : cnt,
+                date : ( now.getFullYear().toString() +"-"+ common.convertNum(now.getMonth()+1) +"-"+ common.convertNum(now.getDate()) +" " + common.convertNum(now.getHours()) + ":" + common.convertNum(now.getMinutes()) + ":" + common.convertNum(now.getSeconds()) )
+            };
+            var _id = user.token+(new Date()).getTime().toString();
+            messagePool.push(_id);
+            showMessage( json, _id );
+    		s.send( JSON.stringify({ msg : cnt ,_id :  _id}) );
+            setTimeout(function() {
+                timeoutCheck(_id, true)
+            }, 5000);
+            $("#chat").val("");
+        }
+        function timeoutCheck(str, check){
+            let ind = messagePool.indexOf(str);
+            if(ind > -1){
+                messagePool.splice(ind,1);
+                if(check){
+                    $("#"+str).find("p").eq(0).css({color:"#f60"}).append("<div class=\"c-send g-pointer\">发送失败，点击重新发送</div>");
+                }
+            } 
+        }
+        $(document).on("click", ".c-send", function(){
+            var m = $(this).parent().parent();
+            var text = m.find(".c-chat_cnt").eq(0).html();
+            m.remove();
+            submit(text);
+        });
+        var s = Gsocket({
+            url : location.hostname+":8181",
+            success : null,
+            error : null,
+            message : receive,
+            close : null
+        });
+	</script>
+<% include footer.html %> 
